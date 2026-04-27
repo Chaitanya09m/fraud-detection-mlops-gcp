@@ -1,26 +1,48 @@
 pipeline {
     agent any
 
+    environment {
+        PROJECT_ID = 'project-b346305c-6a86-4392-9d4'
+        REGION = 'us-central1'
+        REPOSITORY = 'fraud-repo'
+        API_SERVICE = 'fraud-api'
+        API_IMAGE = "us-central1-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/fraud-api:${BUILD_NUMBER}"
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Authenticate GCP') {
             steps {
-                echo 'Checking out source code...'
+                withCredentials([file(credentialsId: 'gcp-service-account-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                    sh '''
+                        gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+                        gcloud config set project $PROJECT_ID
+                        gcloud auth configure-docker ${REGION}-docker.pkg.dev --quiet
+                    '''
+                }
             }
         }
 
-        stage('Verify Docker') {
+        stage('Build API Image') {
             steps {
-                sh 'docker --version'
-                sh 'docker ps'
+                sh 'docker build -t $API_IMAGE ./api'
             }
         }
 
-        stage('Verify Repo Structure') {
+        stage('Push API Image') {
             steps {
-                sh 'ls -la'
-                sh 'ls -la training'
-                sh 'ls -la api'
-                sh 'ls -la trigger'
+                sh 'docker push $API_IMAGE'
+            }
+        }
+
+        stage('Deploy API to Cloud Run') {
+            steps {
+                sh '''
+                    gcloud run deploy $API_SERVICE \
+                      --image $API_IMAGE \
+                      --region $REGION \
+                      --platform managed \
+                      --allow-unauthenticated
+                '''
             }
         }
     }
