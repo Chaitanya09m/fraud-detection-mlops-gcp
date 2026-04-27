@@ -21,7 +21,7 @@ pipeline {
 
         stage('Build API Image') {
             steps {
-                sh 'docker build -t $API_IMAGE ./api'
+                sh 'docker build --platform linux/amd64 -t $API_IMAGE ./api'
             }
         }
 
