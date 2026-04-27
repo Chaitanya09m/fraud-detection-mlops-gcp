@@ -12,11 +12,10 @@ pipeline {
     stages {
         stage('Authenticate GCP') {
             steps {
-                    sh '''
-                        gcloud config set project $PROJECT_ID
-                        gcloud auth configure-docker ${REGION}-docker.pkg.dev --quiet
-                    '''
-                }
+                sh '''
+                    gcloud config set project $PROJECT_ID
+                    gcloud auth configure-docker ${REGION}-docker.pkg.dev --quiet
+                '''
             }
         }
 
