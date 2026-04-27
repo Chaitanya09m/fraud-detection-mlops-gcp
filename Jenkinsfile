@@ -21,7 +21,9 @@ pipeline {
 
         stage('Build API Image') {
             steps {
-                sh 'docker build --platform linux/amd64 -t $API_IMAGE ./api'
+                sh '''
+                     docker system prune -af || true
+                      docker build  --no-cache --platform linux/amd64 -t $API_IMAGE ./api'''
             }
         }
 
