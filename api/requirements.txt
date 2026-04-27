@@ -1,0 +1,14 @@
+pandas
+numpy
+scikit-learn
+xgboost
+joblib
+imbalanced-learn
+google-cloud-storage
+gcsfs
+fastapi
+uvicorn
+python-multipart
+requests
+google-auth
+pydantic
