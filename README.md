@@ -1,10 +1,10 @@
-# 🚀 End-to-End MLOps Pipeline for Credit Card Fraud Detection
+#  End-to-End MLOps Pipeline for Credit Card Fraud Detection
 
 This project implements a **production-style MLOps system** that automates model retraining, deployment, and monitoring using Google Cloud Platform and modern DevOps tools.
 
 ---
 
-## 🧠 Problem Statement
+## Problem Statement
 
 Traditional ML systems require manual retraining and deployment when new data arrives.
 
@@ -16,7 +16,7 @@ This project solves that by building a **fully automated, event-driven pipeline*
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 
         ┌──────────────┐
         │   New Data   │
@@ -46,16 +46,16 @@ Cloud Run API → /metrics → Prometheus → Grafana Dashboard
 
 ---
 
-## ⚙️ Key Features
+##  Key Features
 
-### 🔁 Automated Model Retraining
+###  Automated Model Retraining
 - Triggered via **GCS → Pub/Sub → Cloud Run Jobs**
 - Uses **XGBoost + SMOTE + preprocessing**
 - Stores latest model in GCS (`models/latest/`)
 
 ---
 
-### 🚀 CI/CD with Jenkins
+###  CI/CD with Jenkins
 - Automated pipeline for:
   - Docker image build
   - Push to Artifact Registry
@@ -64,7 +64,7 @@ Cloud Run API → /metrics → Prometheus → Grafana Dashboard
 
 ---
 
-### 📊 Monitoring & Observability
+###  Monitoring & Observability
 - Instrumented FastAPI with **Prometheus metrics**
 - Built **Grafana dashboards** to track:
   - API request rate
@@ -74,7 +74,7 @@ Cloud Run API → /metrics → Prometheus → Grafana Dashboard
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 api/ → FastAPI inference service
 training/ → Model training pipeline
@@ -87,7 +87,7 @@ docs/ → Architecture and setup
 
 ---
 
-## 🔧 Technologies Used
+##  Technologies Used
 
 - **Cloud**: Google Cloud Platform (GCS, Pub/Sub, Cloud Run)
 - **MLOps**: Docker, Jenkins, Artifact Registry
@@ -97,7 +97,7 @@ docs/ → Architecture and setup
 
 ---
 
-## 📈 Example Metrics
+##  Example Metrics
 
 - Request rate (req/sec)
 - Prediction endpoint traffic
@@ -106,7 +106,7 @@ docs/ → Architecture and setup
 
 ---
 
-## 🎯 Key Learning Outcomes
+##  Key Learning Outcomes
 
 - Built a **fully automated MLOps pipeline**
 - Implemented **event-driven retraining architecture**
@@ -115,7 +115,7 @@ docs/ → Architecture and setup
 
 ---
 
-## 🚀 Future Improvements
+##  Future Improvements
 
 - Alerting (Slack/email) for failures
 - Model drift detection
@@ -123,7 +123,7 @@ docs/ → Architecture and setup
 
 ---
 
-## 👤 Author
+##  Author
 
 Chaitanya Mishra
 
