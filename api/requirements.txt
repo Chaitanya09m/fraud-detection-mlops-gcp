@@ -12,3 +12,4 @@ python-multipart
 requests
 google-auth
 pydantic
+prometheus-fastapi-instrumentator

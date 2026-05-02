@@ -5,8 +5,10 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from google.cloud import storage
 import tempfile
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
+Instrumentator().instrument(app).expose(app)
 
 model = None
 scaler = None
