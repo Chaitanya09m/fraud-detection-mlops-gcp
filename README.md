@@ -1,55 +1,130 @@
-# End-to-End MLOps Pipeline on GCP for Credit Card Fraud Detection
+# 🚀 End-to-End MLOps Pipeline for Credit Card Fraud Detection
 
-This project implements a cloud-native, event-driven MLOps pipeline on Google Cloud Platform for automated credit card fraud detection.
+This project implements a **production-style MLOps system** that automates model retraining, deployment, and monitoring using Google Cloud Platform and modern DevOps tools.
 
-## Project Overview
+---
 
-The system automatically retrains an XGBoost fraud detection model whenever new transaction data is uploaded to Google Cloud Storage. The trained model is stored in GCS as a lightweight model registry and served through a FastAPI inference API deployed on Cloud Run.
+## 🧠 Problem Statement
 
-## Architecture
+Traditional ML systems require manual retraining and deployment when new data arrives.
 
-GCS Data Upload → Pub/Sub Event → Cloud Run Trigger Service → Cloud Run Training Job → GCS Model Registry → Cloud Run Inference API
+This project solves that by building a **fully automated, event-driven pipeline** that:
 
-## Technologies Used
+- Retrains models on new data automatically
+- Deploys updated APIs via CI/CD
+- Monitors system performance in real time
 
-- Google Cloud Storage
-- Pub/Sub
-- Cloud Run
-- Cloud Run Jobs
-- Artifact Registry
-- Docker
-- FastAPI
-- XGBoost
-- scikit-learn
-- SMOTE
-- Cloud Logging
+---
 
-## Components
+## 🏗️ System Architecture
 
-### 1. Training Service
+        ┌──────────────┐
+        │   New Data   │
+        └──────┬───────┘
+               ↓
+        Google Cloud Storage (GCS)
+               ↓
+          Pub/Sub Event
+               ↓
+      Cloud Run Trigger Service
+               ↓
+      Cloud Run Training Job
+               ↓
+        Model stored in GCS
+               ↓
+     FastAPI Inference Service
+               ↓
+            Predictions
 
-The training component reads the base dataset from GCS, preprocesses the data, applies SMOTE to handle class imbalance, trains an XGBoost classifier, and uploads the model artifacts to GCS.
+### CI/CD Pipeline
 
-### 2. Inference API
+GitHub → Jenkins → Docker → Artifact Registry → Cloud Run
 
-The inference API loads the latest model and scaler from GCS and exposes a `/predict` endpoint for real-time fraud prediction.
+### Monitoring Pipeline
 
-### 3. Trigger Service
+Cloud Run API → /metrics → Prometheus → Grafana Dashboard
 
-The trigger service receives Pub/Sub push events from Cloud Storage and starts the Cloud Run training job automatically.
+---
 
-## Current Status
+## ⚙️ Key Features
 
-- Automated training pipeline implemented
-- Cloud Run API deployed
-- Pub/Sub-based retraining trigger implemented
-- Model registry stored in GCS
-- Monitoring and CI/CD planned as future enhancements
+### 🔁 Automated Model Retraining
+- Triggered via **GCS → Pub/Sub → Cloud Run Jobs**
+- Uses **XGBoost + SMOTE + preprocessing**
+- Stores latest model in GCS (`models/latest/`)
 
-## Future Enhancements
+---
 
-- Jenkins CI/CD pipeline
-- Prometheus and Grafana monitoring
-- Model versioning and rollback
-- Drift detection
-- Load testing
+### 🚀 CI/CD with Jenkins
+- Automated pipeline for:
+  - Docker image build
+  - Push to Artifact Registry
+  - Deployment to Cloud Run
+- Supports continuous deployment on code updates
+
+---
+
+### 📊 Monitoring & Observability
+- Instrumented FastAPI with **Prometheus metrics**
+- Built **Grafana dashboards** to track:
+  - API request rate
+  - Prediction traffic
+  - Error rate (4xx responses)
+  - Success ratio
+
+---
+
+## 📁 Project Structure
+
+api/ → FastAPI inference service
+training/ → Model training pipeline
+trigger/ → Pub/Sub trigger service
+monitoring/
+├── prometheus/ → Prometheus config
+└── grafana/ → Dashboard JSON
+Jenkinsfile → CI/CD pipeline
+docs/ → Architecture and setup
+
+---
+
+## 🔧 Technologies Used
+
+- **Cloud**: Google Cloud Platform (GCS, Pub/Sub, Cloud Run)
+- **MLOps**: Docker, Jenkins, Artifact Registry
+- **ML**: XGBoost, SMOTE, Scikit-learn
+- **Backend**: FastAPI
+- **Monitoring**: Prometheus, Grafana
+
+---
+
+## 📈 Example Metrics
+
+- Request rate (req/sec)
+- Prediction endpoint traffic
+- Error rate monitoring
+- Success vs failure ratio
+
+---
+
+## 🎯 Key Learning Outcomes
+
+- Built a **fully automated MLOps pipeline**
+- Implemented **event-driven retraining architecture**
+- Designed **CI/CD for ML systems**
+- Integrated **real-time monitoring and observability**
+
+---
+
+## 🚀 Future Improvements
+
+- Alerting (Slack/email) for failures
+- Model drift detection
+- Kubernetes-based deployment (GKE)
+
+---
+
+## 👤 Author
+
+Chaitanya Mishra
+
+
