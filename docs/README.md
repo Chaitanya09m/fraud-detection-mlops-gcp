@@ -2,7 +2,7 @@
 
 This document showcases the architecture, workflow, and monitoring setup of an end-to-end event-driven MLOps pipeline built on Google Cloud Platform.
 
-## 📌 Overview
+## Overview
 - Event-driven retraining using GCS + Pub/Sub
 - Serverless deployment using Cloud Run
 - CI/CD pipeline using Jenkins + Docker
@@ -10,13 +10,13 @@ This document showcases the architecture, workflow, and monitoring setup of an e
 
 ---
 
-## 🏗 Architecture Diagram
+##  Architecture Diagram
 
 (Refer to the main document: `mlops-architecture.docx`)
 
 ---
 
-## ⚙️ CI/CD Pipeline
+##  CI/CD Pipeline
 
 ![Jenkins Pipeline](images/jenkins.png)
 
@@ -28,19 +28,19 @@ This document showcases the architecture, workflow, and monitoring setup of an e
 
 ---
 
-## 📊 Prometheus Metrics
+##  Prometheus Metrics
 
 ![Prometheus](images/prometheus.png)
 
 ---
 
-## 📈 Grafana Dashboard
+## Grafana Dashboard
 
 ![Grafana](images/grafana.png)
 
 ---
 
-## 💡 Key Highlights
+##  Key Highlights
 
 - Fully automated retraining pipeline
 - Serverless architecture (Cloud Run)
